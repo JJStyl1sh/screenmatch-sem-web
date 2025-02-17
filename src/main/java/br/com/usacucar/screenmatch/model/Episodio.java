@@ -1,6 +1,5 @@
 package br.com.usacucar.screenmatch.model;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -8,22 +7,23 @@ public class Episodio {
     private Integer temporada;
     private String titulo;
     private Integer numeroEpisodio;
-    private double avaliacao;
+    private Double avaliacao;
     private LocalDate dataLancamento;
 
-    public Episodio(Integer temporada, DadosEpisodio dadosEpisodio) {
-        this.temporada = temporada;
+    public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodio) {
+        this.temporada = numeroTemporada;
         this.titulo = dadosEpisodio.titulo();
-        this.numeroEpisodio = dadosEpisodio.numeroEpisodio();
+        this.numeroEpisodio = dadosEpisodio.numero();
+
         try {
             this.avaliacao = Double.valueOf(dadosEpisodio.avaliacao());
-
-        }catch (NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             this.avaliacao = 0.0;
         }
+
         try {
             this.dataLancamento = LocalDate.parse(dadosEpisodio.dataLancamento());
-        }catch (DateTimeParseException dt){
+        } catch (DateTimeParseException ex) {
             this.dataLancamento = null;
         }
     }
@@ -52,11 +52,11 @@ public class Episodio {
         this.numeroEpisodio = numeroEpisodio;
     }
 
-    public double getAvaliacao() {
+    public Double getAvaliacao() {
         return avaliacao;
     }
 
-    public void setAvaliacao(double avaliacao) {
+    public void setAvaliacao(Double avaliacao) {
         this.avaliacao = avaliacao;
     }
 
@@ -70,11 +70,10 @@ public class Episodio {
 
     @Override
     public String toString() {
-        return
-                "temporada=" + temporada +
+        return "temporada=" + temporada +
                 ", titulo='" + titulo + '\'' +
                 ", numeroEpisodio=" + numeroEpisodio +
                 ", avaliacao=" + avaliacao +
-                ", dataLancamento=" + dataLancamento;
+                ", dataLancamento=" + dataLancamento ;
     }
 }
